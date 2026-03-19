@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "emptyserverstopper",
+	"version": "${version}",
+	"name": "EmptyServerStopper",
+	"description": "Automatic empty server shutdown for fabric 1.20.2",
+	"authors": [
+		"MartinKR"
+	],
+	"contact": {
+		"homepage": "",
+		"sources": "https://github.com/Martinkrk/EmptyServerStopper/"
+	},
+	"license": "Unlicense",
+	"icon": "assets/emptyserverstopper/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"me.martinkr.EmptyServerStopper"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.20.2",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}
