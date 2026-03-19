@@ -1,11 +1,11 @@
-# Empty Server Stopper <hr>
+# Empty Server Stopper
 
 ## Usage
 For now, works only with `1.20.2`.
 
 Requires [fabric-api](https://fabricmc.net/use/installer/).
 
-Works best with a [SleepingServerStarter](https://github.com/vincss/mcsleepingserverstarter).
+Works best with: [SleepingServerStarter](https://github.com/vincss/mcsleepingserverstarter).
 
 ## Config
 After you boot the server a new config file will be generated in the path `./config/emptyserverstopper/config.json`.
