@@ -3,9 +3,10 @@
 	"id": "emptyserverstopper",
 	"version": "${version}",
 	"name": "EmptyServerStopper",
-	"description": "Automatic empty server shutdown for fabric 1.20.2",
+	"description": "Automatic empty server shutdown for Fabric 1.20.2",
 	"authors": [
-		"MartinKR"
+		"MartinKR",
+		"Mat1212"
 	],
 	"contact": {
 		"homepage": "",
@@ -15,9 +16,14 @@
 	"icon": "assets/emptyserverstopper/icon.png",
 	"environment": "*",
 	"entrypoints": {
-		"main": [
+		"server": [
 			"me.martinkr.EmptyServerStopper"
 		]
+	},
+	"custom": {
+		"fabric-lobby-check": {
+			"side": "server"
+		}
 	},
 	"depends": {
 		"fabricloader": ">=0.18.4",

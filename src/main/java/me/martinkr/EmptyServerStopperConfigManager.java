@@ -15,9 +15,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class EmptyServerStopperConfigManager {
-    public static final String MOD_ID = "emptyserverstopper";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-    public static final String MOD_NAME = "Empty Server Stopper";
+    public static final String MOD_ID = EmptyServerStopper.MOD_ID;
+    public static final Logger LOGGER = EmptyServerStopper.LOGGER;
+    public static final String MOD_NAME = EmptyServerStopper.MOD_NAME;
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Path configDir = FabricLoader.getInstance().getConfigDir();
@@ -39,22 +39,27 @@ public class EmptyServerStopperConfigManager {
                 saveConfig();
                 LOGGER.info("[{}] config.json created.", MOD_NAME);
             } else {
-                loadConfig();
+                loadConfig(true);
             }
         } catch (IOException e) {
             LOGGER.error("[{}] error during initialization process. {}", MOD_NAME, e.getMessage());
         }
     }
 
-    public static void loadConfig() {
+    public static void loadConfig(boolean init) {
         try (FileReader reader = new FileReader(modConfigFile.toFile())) {
-            currentConfig = GSON.fromJson(reader, EmptyServerStopperConfigObject.class);
+            EmptyServerStopperConfigObject loaded = GSON.fromJson(reader, EmptyServerStopperConfigObject.class);
+            if (loaded != null) {
+                currentConfig = loaded;
+                if (init) LOGGER.info("[{}] Config loaded successfully.", MOD_NAME);
+            } else {
+                if (init) LOGGER.warn("[{}] Config file was empty, using defaults.", MOD_NAME);
+                currentConfig = new EmptyServerStopperConfigObject();
+            }
         } catch (IOException e) {
-            LOGGER.error("[{}] error when trying to load the config file. {}", MOD_NAME, e.getMessage());
+            LOGGER.error("[{}] Error loading config: {}", MOD_NAME, e.getMessage());
             currentConfig = new EmptyServerStopperConfigObject();
-        }
-        saveConfig();
-        LOGGER.info("[{}] config loaded.", MOD_NAME);
+        }        saveConfig();
     }
 
     public static void saveConfig() {

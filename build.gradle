@@ -4,7 +4,7 @@ plugins {
 }
 
 group = project.maven_group
-version = "mc" + project.minecraft_version + "-" + project.mod_version
+version = "${project.mod_version}+${project.minecraft_version}"
 
 base {
 	archivesName = project.archives_base_name
@@ -40,6 +40,22 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_17
 	targetCompatibility = JavaVersion.VERSION_17
 }
+
+tasks.named('build').configure {
+	mustRunAfter('clean')
+}
+tasks.named('runServer').configure {
+	mustRunAfter('build')
+}
+
+tasks.register("cleanBuildRunServer") {
+	// Put it in a specific category in IDE
+	group = "fabric_custom"
+	description = "Clean project, recompile it and launch server."
+
+	dependsOn 'clean', 'build', 'runServer'
+}
+
 
 jar {
 	from "LICENSE"
