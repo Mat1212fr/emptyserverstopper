@@ -1,4 +1,4 @@
-package me.martinkr;
+package com.mat1212fr;
 
 import net.fabricmc.loader.api.FabricLoader;
 

@@ -1,4 +1,4 @@
-package me.martinkr;
+package com.mat1212fr;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;

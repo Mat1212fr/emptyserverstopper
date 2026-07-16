@@ -6,10 +6,6 @@ plugins {
 group = project.maven_group
 version = "${project.mod_version}"
 
-base {
-	archivesName = project.archives_base_name
-}
-
 repositories {
 }
 
@@ -51,6 +47,10 @@ java {
 	targetCompatibility = JavaVersion.VERSION_25
 }
 
+tasks.named('sourcesJar') {
+	enabled = false
+}
+
 tasks.named('build').configure {
 	mustRunAfter("clean")
 }
@@ -66,13 +66,17 @@ tasks.register("cleanBuildRunServer") {
 
 
 jar {
-	from "LICENSE"
+	def projectName = project.name
+	inputs.property "projectName", projectName
+
+	archiveFileName = "${project.name}-${project.version}.jar"
+
+	from("LICENSE")
 }
 
 publishing {
 	publications {
 		create("mavenJava", MavenPublication) {
-			artifactId = project.archives_base_name
 			from components.java
 		}
 	}

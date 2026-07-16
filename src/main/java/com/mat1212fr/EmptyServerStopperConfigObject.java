@@ -1,4 +1,4 @@
-package me.martinkr;
+package com.mat1212fr;
 
 public class EmptyServerStopperConfigObject {
     public boolean enabled = true;
