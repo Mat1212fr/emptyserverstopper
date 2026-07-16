@@ -52,3 +52,9 @@ for it to persist across restarts.
 
 - [X] Port to recent version: `26.1.2`
 - [ ] ~~*Translations support?*~~ Not practical — the mod is server-side only
+
+## Contributors
+
+Original author: [Martinkrk](https://github.com/Martinkrk)
+
+Current author: [Mat1212fr](https://github.com/Mat1212fr)
