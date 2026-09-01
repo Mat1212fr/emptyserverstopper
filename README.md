@@ -1,6 +1,6 @@
 # Empty Server Stopper
 
-[![](https://cf.way2muchnoise.eu/versions/1616697.svg)](https://www.curseforge.com/minecraft/mc-mods/empty-server-stopper-fabric) <img width="170" height="20" alt="empty-server-stopper 1" src="https://github.com/user-attachments/assets/8f529e59-abdf-46fe-a0ab-b9ff0198675c" />
+[![](https://cf.way2muchnoise.eu/versions/1616697.svg)](https://www.curseforge.com/minecraft/mc-mods/empty-server-stopper-fabric) <a href="https://modrinth.com/mod/sleeping-server-stopper-fabric"><img width="170" height="20" alt="empty-server-stopper 1" src="https://github.com/user-attachments/assets/8f529e59-abdf-46fe-a0ab-b9ff0198675c" /></a>
 
 A Fabric mod that automatically shuts down the server when it's empty or below a certain player threshold. Ideal for use
 with hibernation scripts.
