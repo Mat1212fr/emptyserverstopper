@@ -26,6 +26,10 @@ This document outlines the guidelines, conventions, and operational constraints 
 - **Single Universal Build Goal:**
   - Aim for a single mod JAR capable of supporting multiple Minecraft versions simultaneously.
   - Core target range: Minecraft **`26.1.2` and above** (specifically `26.1.2`, `26.2`, `26.3`, and subsequent compatible point releases).
+- **Mod Versioning & Artifact Naming Convention:**
+  - The project follows the standard Fabric mod nomenclature: `<mod_version>+<minecraft_version>` (e.g., `1.2.2+26.3`).
+  - The version name must match the latest supported Minecraft version target by default (`minecraft_version=26.3` in `gradle.properties`).
+  - Generated mod JARs follow the pattern `${project.name}-${project.version}.jar` (e.g. `emptyserverstopper-1.2.2+26.3.jar`).
 - **Future-Proof Codebase Design:**
   - Avoid relying on fragile, internal, or frequently changing Mojang mappings.
   - Rely on stable Fabric APIs (e.g., `ServerLifecycleEvents`, `ServerPlayConnectionEvents`, `CommandRegistrationCallback`) and Mojang Brigadier.
@@ -44,3 +48,4 @@ This document outlines the guidelines, conventions, and operational constraints 
   - The primary development and testing environment is **IntelliJ IDEA**.
   - All Gradle tasks and configurations must remain compatible with IntelliJ's Gradle integration and Fabric Loom run configurations (e.g., `runServer`, `cleanBuildRunServer`).
   - Version targets can be adjusted or overridden via project properties (e.g., `-Pminecraft_version=26.3` or `-Pminecraft_version=26.1.2`).
+  - The custom `cleanBuildRunServer` task automatically runs `cleanWorld` before starting to avoid chunk corruption caused by Minecraft version downgrades.
