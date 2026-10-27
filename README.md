@@ -7,7 +7,7 @@ with hibernation scripts.
 
 ## Usage
 
-- **Version:** Minecraft `26.1.2` or higher
+- **Version:** Minecraft `26.1.2` or higher (compatible with `26.1.2`, `26.2`, `26.3+`)
 - **Requirement:** [Fabric API](https://fabricmc.net/use/installer/)
 - **Best with:** [SleepingServerStarter](https://github.com/vincss/mcsleepingserverstarter)
 
@@ -52,7 +52,7 @@ for it to persist across restarts.
 
 ## TODO
 
-- [X] Port to recent version: `26.1.2`
+- [X] Port to recent versions: `26.1.2`, `26.2`, and `26.3`
 - [ ] ~~*Translations support?*~~ Not practical — the mod is server-side only
 
 ## Contributors

@@ -21,8 +21,8 @@
 		]
 	},
 	"depends": {
-		"fabricloader": ">=0.19.0",
-		"minecraft": ">=26.1.2",
+		"fabricloader": "${loader_dependency}",
+		"minecraft": "${minecraft_dependency}",
 		"fabric-api": "*"
 	}
 }

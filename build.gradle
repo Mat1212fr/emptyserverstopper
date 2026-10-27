@@ -20,18 +20,34 @@ loom {
 	}
 }
 
+// Fabric API mappings for supported Minecraft versions
+def fabricApiVersions = [
+	"26.1.2": "0.154.2+26.1.2",
+	"26.2"  : "0.152.1+26.2",
+	"26.3"  : "0.165.0+26.3"
+]
+
+def effectiveMcVersion = project.property("minecraft_version")
+def effectiveFabricApi = project.hasProperty("fabric_api_version") && project.property("fabric_api_version") != "" ?
+	project.property("fabric_api_version") :
+	fabricApiVersions.getOrDefault(effectiveMcVersion, project.fabric_api_version)
+
 dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	minecraft "com.mojang:minecraft:${effectiveMcVersion}"
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${effectiveFabricApi}"
 }
 
 processResources {
 	def version = project.version
 	inputs.property "version", version
+	inputs.property "minecraft_dependency", project.minecraft_dependency
+	inputs.property "loader_dependency", project.loader_dependency
 
 	filesMatching("fabric.mod.json") {
-		expand "version": version
+		expand "version": version,
+		       "minecraft_dependency": project.minecraft_dependency,
+		       "loader_dependency": project.loader_dependency
 	}
 }
 
@@ -63,7 +79,6 @@ tasks.register("cleanBuildRunServer") {
 	description = "Clean project, recompile it and launch server."
 	dependsOn("clean", "build", "runServer")
 }
-
 
 jar {
 	def projectName = project.name

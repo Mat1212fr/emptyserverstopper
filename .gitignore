@@ -1,3 +1,6 @@
+# local scripts
+gradle.ps1
+
 # gradle
 
 .gradle/
