@@ -50,13 +50,12 @@ for it to persist across restarts.
 - **Auto-cancel:** the timer is automatically canceled if enough players join to bring the count back above the
   threshold, and restarted automatically if it drops below again.
 
-## TODO
+## Development
 
-- [X] Port to recent versions: `26.1.2`, `26.2`, and `26.3`
-- [ ] ~~*Translations support?*~~ Not practical — the mod is server-side only
+For build instructions, multi-version testing tricks, and architecture details, see [DEVELOPMENT.md](DEVELOPMENT.md).
 
 ## Contributors
 
-Original author: [Martinkrk](https://github.com/Martinkrk)
-
-Current author: [Mat1212fr](https://github.com/Mat1212fr)
+- **Original author:** [Martinkrk](https://github.com/Martinkrk)
+- **Maintainer:** [Mat1212fr](https://github.com/Mat1212fr)
+- **Contributor:** [Antigravity](https://github.com/google-deepmind) (AI Agent by Google DeepMind)
