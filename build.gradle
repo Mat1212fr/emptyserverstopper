@@ -23,14 +23,21 @@ loom {
 // Fabric API mappings for supported Minecraft versions
 def fabricApiVersions = [
 	"26.1.2": "0.154.2+26.1.2",
-	"26.2"  : "0.152.1+26.2",
+	"26.2"  : "0.160.0+26.2",
 	"26.3"  : "0.165.0+26.3"
 ]
 
 def effectiveMcVersion = project.property("minecraft_version")
-def effectiveFabricApi = project.hasProperty("fabric_api_version") && project.property("fabric_api_version") != "" ?
-	project.property("fabric_api_version") :
-	fabricApiVersions.getOrDefault(effectiveMcVersion, project.fabric_api_version)
+
+// Priority:
+// 1. Explicit CLI argument: -Pfabric_api_version=...
+// 2. Mapped version in fabricApiVersions for the effective Minecraft version
+// 3. Fallback to gradle.properties or default
+def effectiveFabricApi = gradle.startParameter.projectProperties.containsKey("fabric_api_version") ?
+	gradle.startParameter.projectProperties["fabric_api_version"] :
+	fabricApiVersions.getOrDefault(effectiveMcVersion, project.findProperty("fabric_api_version") ?: "0.165.0+26.3")
+
+logger.lifecycle("Targeting Minecraft: ${effectiveMcVersion} with Fabric API: ${effectiveFabricApi}")
 
 dependencies {
 	minecraft "com.mojang:minecraft:${effectiveMcVersion}"
