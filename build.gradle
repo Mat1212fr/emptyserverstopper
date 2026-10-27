@@ -32,10 +32,10 @@ def effectiveMcVersion = project.property("minecraft_version")
 // Priority:
 // 1. Explicit CLI argument: -Pfabric_api_version=...
 // 2. Mapped version in fabricApiVersions for the effective Minecraft version
-// 3. Fallback to gradle.properties or default
+// 3. Fallback to gradle.properties (project.fabric_api_version)
 def effectiveFabricApi = gradle.startParameter.projectProperties.containsKey("fabric_api_version") ?
 	gradle.startParameter.projectProperties["fabric_api_version"] :
-	fabricApiVersions.getOrDefault(effectiveMcVersion, project.findProperty("fabric_api_version") ?: "0.165.0+26.3")
+	fabricApiVersions.getOrDefault(effectiveMcVersion, project.fabric_api_version)
 
 logger.lifecycle("Targeting Minecraft: ${effectiveMcVersion} with Fabric API: ${effectiveFabricApi}")
 
@@ -79,6 +79,12 @@ tasks.named('build').configure {
 }
 tasks.named('runServer').configure {
 	mustRunAfter("build")
+}
+
+tasks.register("cleanWorld", Delete) {
+	group = "fabric_custom"
+	description = "Deletes the development world in run/world to prevent cross-version chunk corruption."
+	delete("run/world")
 }
 
 tasks.register("cleanBuildRunServer") {
