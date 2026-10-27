@@ -74,23 +74,23 @@ tasks.named('sourcesJar') {
 	enabled = false
 }
 
-tasks.named('build').configure {
-	mustRunAfter("clean")
-}
-tasks.named('runServer').configure {
-	mustRunAfter("build")
-}
-
 tasks.register("cleanWorld", Delete) {
 	group = "fabric_custom"
 	description = "Deletes the development world in run/world to prevent cross-version chunk corruption."
 	delete("run/world")
 }
 
+tasks.named('build').configure {
+	mustRunAfter("clean", "cleanWorld")
+}
+tasks.named('runServer').configure {
+	mustRunAfter("build", "cleanWorld")
+}
+
 tasks.register("cleanBuildRunServer") {
 	group = "fabric_custom"
-	description = "Clean project, recompile it and launch server."
-	dependsOn("clean", "build", "runServer")
+	description = "Clean project and development world, recompile, and launch server."
+	dependsOn("clean", "cleanWorld", "build", "runServer")
 }
 
 jar {
